@@ -10,6 +10,8 @@ data = {}
 
 @app.route("/")
 def index():
+    if not session.get("username"):
+        return redirect("/signin")
     return render_template("index.html")
 
 @app.route("/keep_alive")
@@ -42,5 +44,5 @@ def validateUser(username, password, confirmPassword):
     return True
 
 
-if __name__ == '__main__':
+if __name__ == '__application__':
     app.run()
