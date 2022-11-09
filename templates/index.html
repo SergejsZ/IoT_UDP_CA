@@ -1,151 +1,138 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
-.w3-bar-block .w3-bar-item {padding:20px}
-</style>
-	<style>
+    <title>IOT_UDP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.navbar {
-  overflow: hidden;
-  background-color: #11B86B;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-.navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
+/* Style the header */
+.header {
+  background-color: #FFFFFF;
+  padding: 30px;
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+  font-size: 35px;
 }
 
-.navbar a:hover {
-  background: #11B86B;
-  color: black;
+/* Container for flexboxes */
+.row {
+  display: -webkit-flex;
+  display: flex;
 }
 
-navbar a.active {
-  background-color: #11B86B;
-  color: white;
+/* Create three unequal columns that sits next to each other */
+.column {
+ background-color: #FFFFFF;
+  padding: 40px;
+<!--  height: 100px; /* Should be removed. Only for demonstration */-->
 }
 
-.main {
-  padding: 16px;
-  margin-bottom: 30px;
+/* Left and right column */
+.column.side {
+   -webkit-flex: 1;
+   -ms-flex: 1;
+   flex: 1;
 }
-</style>
+
+/* Middle column */
+.column.middle {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+}
+/* Middle bottom column */
+.column.middle.bottom {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 3;
+}
+.column.bottom {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 4;
+}
+/* Style the footer */
+.footer {
+<!--  padding: 10px;-->
+<!--  text-align: center;-->
+bottom: 0;
+}
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .row {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="/static/css/html.css" media=”sc    reen” />
 </head>
-<body  onload="keepAlive(); time(); setupPubNub();">
-		<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.0.js"></script>
-		<script src="static/js/main.js"></script>
-		<h1> Online </h1>
-		<h2>Connection: <span id="Connection_id">...</span></h2>
-		<h2>Motion: <span id="motion_id">...</span></h2>
-		<div>
-			<input type="checkbox" id="buzzer" onclick="handleClick(this);"/>
-			<label id="buzzer_on">Buzzer On</label>
-		</div>
-<!-- Bottom Bar (hidden by default) -->
-<div class="navbar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button"> Purchase Tickets</a>
-  <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Bus Routes</a>
-  <a href="#a bout" onclick="w3_close()" class="w3-bar-item w3-button">Purchase History</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">Exit</a>
-</div>
-<!-- Top menu -->
-<div class="w3-top">
-  <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-      <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-            <div class="w3-center w3-padding-16">Tickets</div>
-      </div>
-  </div>
+<body>
+<!--<body  onload="keepAlive(); time(); setupPubNub();">-->
+<!--		<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.0.js"></script>-->
+<!--		<script src="static/js/main.js"></script>-->
+<!--		<h1> Online </h1>-->
+<!--		<h2>Connection: <span id="Connection_id">...</span></h2>-->
+<!--		<h2>Motion: <span id="motion_id">...</span></h2>-->
+<!--		<div>-->
+<!--			<input type="checkbox" id="buzzer" onclick="handleClick(this);"/>-->
+<!--			<label id="buzzer_on">Buzzer On</label>-->
+<!--		</div>-->
+
+
+<div class="header">
+    <h2>TICKETS</h2>
 </div>
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-
-
-
-    <div class="w3-third">
-      <h3>BLOG POSTS</h3>
-      <ul class="w3-ul w3-hoverable">
-        <li class="w3-padding-16">
-          <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-          <span class="w3-large">Lorem</span><br>
-          <span>Sed mattis nunc</span>
-        </li>
-        <li class="w3-padding-16">
-          <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-          <span class="w3-large">Ipsum</span><br>
-          <span>Praes tinci sed</span>
-        </li>
-      </ul>
-    </div>
-
-  <!-- Footer -->
-  <footer class="w3-row-padding w3-padding-32">
-    <div class="w3-centre">
-      <h3>FOOTER</h3>
-      <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-    </div>
-
-    <div class="w3-third">
-      <ul class="w3-ul w3-hoverable">
-        <li class="w3-padding-16">
-          <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-          <span class="w3-large">Lorem</span><br>
-          <span>Sed mattis nunc</span>
-        </li>
-        <li class="w3-padding-16">
-          <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-          <span class="w3-large">Ipsum</span><br>
-          <span>Praes tinci sed</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="w3-third w3-serif">
-      <h3>POPULAR TAGS</h3>
-      <p>
-        <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dinner</span>
-        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Salmon</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">France</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Drinks</span>
-        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Flavors</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Cuisine</span>
-        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Chicken</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Dressing</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Fried</span>
-        <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Fish</span> <span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Duck</span>
-      </p>
-    </div>
-  </footer>
-
-<!-- End page content -->
+<div class="column middle" style="background-color:#FFFFFF;">
+    <button type="button" class="btn btn-info btn-lg btn-block">Search Routes And Times</button>
 </div>
 
-<script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-}
+<div class="column middle bottom" style="background-color:#FFFFFF;">
+    <button type="button" class="btn btn-info btn-lg btn-block"><h2>My Tickets</h2>
+        <br>View, Refund and expenses
+    </button>
+</div>
 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
+<footer>
+<div class="footer">
+    <div class="column bottom" style="backgruond-color:#FFFFFF;">
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline">
+                <button class="btn btn-outline-info" type="button">Active Tickets</button>
+                <button class="btn btn-outline-info" type="button">Route Finder</button>
+                <button class="btn btn-outline-info" type="button">Purchase History</button>
+                <button class="btn btn-outline-info" type="button"><img src="../images/backarrow.jpg" alt="return"></button>
 
+            </form>
+        </nav>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
