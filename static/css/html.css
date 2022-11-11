@@ -54,9 +54,19 @@ body {
 }
 /* Style the footer */
 
-.footer{
-
+nav
+{
+background-color: #0FD77B;
 }
+.btn.btn-outline-info
+{
+background-color: #FFFFFF;
+}
+.btn.btn-lg.btn-block
+{
+background-color: #0FD77B;
+}
+
 .icon-bottom {
     position:fixed;
     bottom:0;
