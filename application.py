@@ -12,39 +12,9 @@ data = {}
 def index():
     return render_template("index.html")
 
-
-def login_user(user, remember):
-    pass
-
-
-class User:
-    query = None
-
-
-class SigninForm:
-    def __init__(self):
-        self.password = None
-        self.username = None
-
-    def validate_on_submit(self):
-        pass
-
-
 @app.route("/signin", methods=['GET','POST'])
 def signin():
-    form = SigninForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is not None and user.verify_password(form.password.data):
-            login_user(user, remember=True)
-            session.permanent = True
-            if user.is_admin:
-                return redirect(url_for('home.admin_dashboard'))
-            else:
-                return redirect(url_for('home.dashboard'))
-        else:
-            flash('Invalid username or password.')
-    return render_template('signin.html', form=form, title='Login')
+    return render_template('signin.html')
 
 @app.route("/singin", methods=['GET','POST'])
 def guest():

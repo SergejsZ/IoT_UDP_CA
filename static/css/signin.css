@@ -40,8 +40,10 @@ body {
 
 .w-100.btn.btn-lg{
     background-color: #0FD77B;
+    color: #FFFFFF;
 }
 
 .w-100.btn.btn-lg:hover{
     background-color: #0fbd6d;
+    color: #FFFFFF;
 }
