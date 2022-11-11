@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 body {
@@ -52,14 +53,20 @@ body {
   flex: 4;
 }
 /* Style the footer */
-.footer {
-text-align: center;
+
+.footer{
+
+}
+.icon-bottom {
+    position:fixed;
+    bottom:0;
+    width:100%;
 
 }
 .btn.btn-outline-info
 {
-   margin-left: auto;
-  margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
