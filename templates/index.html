@@ -1,55 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Transport4U</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+{% extends "base.html" %}
+{% block title %}Login System{% endblock %}
 
-    <link href="/static/css/html.css" rel="stylesheet">
+{% block content %}
 
-</head>
-<body>
-<!--<body  onload="keepAlive(); time(); setupPubNub();">-->
-<!--		<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.0.js"></script>-->
-<!--		<script src="static/js/main.js"></script>-->
-<!--		<h1> Online </h1>-->
-<!--		<h2>Connection: <span id="Connection_id">...</span></h2>-->
-<!--		<h2>Motion: <span id="motion_id">...</span></h2>-->
-<!--		<div>-->
-<!--			<input type="checkbox" id="buzzer" onclick="handleClick(this);"/>-->
-<!--			<label id="buzzer_on">Buzzer On</label>-->
-<!--		</div>-->
+{% if message  %}
+    <div class="alert alert-secondary" role="alert">
+        <p>{{ message }}</p>
+    </div>
+{% endif %}
+<main class="form-signin">
+<form action="" method="POST">
+    <img class="logo" src="/static/images/busFinalLogo2.png" alt="logo">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
+    <div class="form-floating">
 
-<div class="header">
-    <h2>Transport4U</h2>
-</div>
+        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+    </div>
+    </br>
+    <div class="form-floating">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+    </div>
+    </br>
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
 
-<div class="column middle" style="background-color:#FFFFFF;">
-    <button type="button" class="btn btn-info btn-lg btn-block">Search Routes And Times</button>
-</div>
-
-<div class="column middle bottom" style="background-color:#FFFFFF;">
-    <button type="button" class="btn btn-info btn-lg btn-block"><h2>My Tickets</h2>
-        <br>View, Refund and expenses
-    </button>
-</div>
-
-<footer class="icon-bottom">
-    <div class="column bottom" style="background-color:#FFFFFF;">
-        <nav class="navbar navbar-light">
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/yourticket.jpg" alt="return"></button>
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/bill.jpg" alt="receipt"></button>
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/bus.jpg" alt="tickets"></button>
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/backarrow.jpg" alt="return"></button>
-        </nav>
-        </div>
-</footer>
-</body>
-</html>
+    <div class="register">
+      <label>
+        <a href="/register">Don't have an Account create one here</a>
+      </label>
+    </div>
+    </br>
+    <div class="guest-link">
+    <a href="/">Continue As Guest</a>
+    </div>
+    </br>
+    <button class="w-100 btn btn-lg" type="submit">Sign in</button>
+    <p class="mt-2 mb-2 text-muted">&copy; Transport4U 2022</p>
+  </form>
+    </main>
+{% endblock %}

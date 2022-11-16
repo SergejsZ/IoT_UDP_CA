@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="header">
+    <h2>Transport4U</h2>
+</div>
+
+<!--{% if message  %}-->
+<!--    <div class="alert alert-secondary" role="alert">-->
+<!--        <p>{{ message }}</p>-->
+<!--    </div>-->
+<!--{% endif %}-->
+
+<div class="column middle" style="background-color:#FFFFFF;">
+    <button type="button" class="btn btn-info btn-lg btn-block">Search Routes And Times</button>
+</div>
+
+<div class="column middle bottom" style="background-color:#FFFFFF;">
+    <button type="button" class="btn btn-info btn-lg btn-block"><h2>My Tickets</h2>
+        <br>View, Refund and expenses
+    </button>
+</div>
+
+<footer class="icon-bottom">
+    <div class="column bottom" style="background-color:#FFFFFF;">
+        <nav class="navbar navbar-light">
+                <button class="btn btn-outline-info" type="button"><img src="/static/images/yourticket.jpg" alt="return"></button>
+                <button class="btn btn-outline-info" type="button"><img src="/static/images/bill.jpg" alt="receipt"></button>
+                <button class="btn btn-outline-info" type="button"><img src="/static/images/bus.jpg" alt="tickets"></button>
+                <button class="btn btn-outline-info" type="button"><img src="/static/images/backarrow.jpg" alt="return"></button>
+        </nav>
+    </div>
+</footer>
+
+{% endblock %}
