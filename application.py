@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 import pymongo
 import bcrypt
+import qrcode
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -49,7 +50,7 @@ def register():
             user_data = users.find_one({"email": email})
             new_email = user_data['email']
 
-            return render_template('index.html', email=new_email)
+            return redirect(url_for("logged_in", email=new_email))
     return render_template('register.html')
 
 
@@ -104,6 +105,23 @@ def logout():
 def buses():
     all_bus = bus.find()
     return render_template('buses.html', bus=all_bus)
+
+
+def qrcode():
+    # Link for website
+    all_bus = bus.find_one({'_id': 1})
+    user = users.find_one({'username': 1})
+    # input_data = "https://towardsdatascience.com/face-detection-in-10-lines-for-beginners-1787aa1d9127"
+    # Creating an instance of qrcode
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=10,
+        border=5)
+    free_image = [all_bus, user]
+    qr.add_data(free_image)
+    qr.make(fit=True)
+    img = qr.make_image(fill='black', back_color='white')
+    img.save('qrcode001.png')
 
 
 # end of code to run it
