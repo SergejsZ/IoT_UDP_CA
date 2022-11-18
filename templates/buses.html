@@ -8,8 +8,9 @@
             <p>Start: {{ todo['start'][0] }}</p>
             <p>End: {{ todo['end'][0] }}</p>
             <p>Stops: {{ todo['stops'] }}</p>
-            <p>Times: {{ todo['times'] }}</p>
-            <input type="button" value="Generate Qr">
+            <p>Departure Time: {{ todo['times'][0] }}</p>
+            <p>Arrival Time: {{ todo['times'][1] }}</p>
+            <input type="button" value="Generate Qr" id="mybutton" onClick="qrCode">
         </div>
 <br>
 {% endfor %}
