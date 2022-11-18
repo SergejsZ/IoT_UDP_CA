@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Register System{% endblock %}
+
+{% block content %}
+<h1>Buses</h1>
+{% for todo in bus %}
+        <div>
+            <p>Start: {{ todo['start'][0] }}</p>
+            <p>End: {{ todo['end'][0] }}</p>
+            <p>Stops: {{ todo['stops'] }}</p>
+            <p>Times: {{ todo['times'] }}</p>
+            <input type="button" value="Generate Qr">
+        </div>
+<br>
+{% endfor %}
+
+{% endblock %}

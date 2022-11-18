@@ -7,7 +7,9 @@ app.secret_key = "testing"
 client = pymongo.MongoClient("mongodb+srv://admin:0xIIagmADdNCgowK@cluster0.3aqrglf.mongodb.net/?retryWrites=true&w"
                              "=majority")
 db = client.get_database('T4U')
-records = db.users
+users = db.users
+bus = db.buses
+tickets = db.tickets
 
 ACCESS = {
     'guest': 0,
@@ -28,8 +30,8 @@ def register():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        user_found = records.find_one({"name": user})
-        email_found = records.find_one({"email": email})
+        user_found = users.find_one({"name": user})
+        email_found = users.find_one({"email": email})
         if user_found:
             message = 'There already is a user by that name'
             return render_template('register.html', message=message)
@@ -42,9 +44,9 @@ def register():
         else:
             hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
             user_input = {'name': user, 'email': email, 'password': hashed, 'access_lvl': ACCESS['user']}
-            records.insert_one(user_input)
+            users.insert_one(user_input)
 
-            user_data = records.find_one({"email": email})
+            user_data = users.find_one({"email": email})
             new_email = user_data['email']
 
             return render_template('index.html', email=new_email)
@@ -70,7 +72,7 @@ def index():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        email_found = records.find_one({"email": email})
+        email_found = users.find_one({"email": email})
         if email_found:
             email_val = email_found['email']
             passwordcheck = email_found['password']
@@ -96,6 +98,12 @@ def logout():
         return redirect(url_for("index"))
     else:
         return render_template('index.html')
+
+
+@app.route("/buses", methods=["POST", "GET"])
+def buses():
+    all_bus = bus.find()
+    return render_template('buses.html', bus=all_bus)
 
 
 # end of code to run it
