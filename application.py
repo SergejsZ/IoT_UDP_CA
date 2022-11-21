@@ -103,9 +103,8 @@ def logout():
 
 @app.route("/buses", methods=["POST", "GET"])
 def buses():
-    all_bus = bus.find()
-    idt = bus.find({'_id': 1})
-    return render_template('buses.html', buses=all_bus, id=idt)
+    all_bus = list(bus.find({}))
+    return render_template('buses.html', buses=all_bus)
 
 
 def qrcode():

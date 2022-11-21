@@ -23,7 +23,11 @@
     <tr>
         <td>{{ bus['start'][0] }}</td>
         <td>{{ bus['end'][0] }}</td>
-        <td>{{ bus['stops'][0][0]}}</td>
+        <td>
+        {% for stop in bus['stops'] %}
+            {{ stop[0]}}
+        {% endfor %}
+        </td>
         <td>{{ bus['times'][0] }}</td>
         <td>{{ bus['times'][1] }}</td>
         <td><input type="button" value="Generate Qr" id="mybutton" onClick="qrCode"></td>
