@@ -98,13 +98,14 @@ def logout():
         session.pop("email", None)
         return redirect(url_for("index"))
     else:
-        return render_template('index.html')
+        return redirect(url_for("index"))
 
 
 @app.route("/buses", methods=["POST", "GET"])
 def buses():
     all_bus = bus.find()
-    return render_template('buses.html', bus=all_bus)
+    idt = bus.find({'_id': 1})
+    return render_template('buses.html', buses=all_bus, id=idt)
 
 
 def qrcode():

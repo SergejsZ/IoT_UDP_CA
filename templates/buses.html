@@ -3,16 +3,16 @@
 
 {% block content %}
 <h1>Buses</h1>
-{% for todo in bus %}
-        <div>
-            <p>Start: {{ todo['start'][0] }}</p>
-            <p>End: {{ todo['end'][0] }}</p>
-            <p>Stops: {{ todo['stops'] }}</p>
-            <p>Departure Time: {{ todo['times'][0] }}</p>
-            <p>Arrival Time: {{ todo['times'][1] }}</p>
-            <input type="button" value="Generate Qr" id="mybutton" onClick="qrCode">
-        </div>
-<br>
+{% for bus in buses %}
+    <div>
+        <p>Start: {{ bus['start'][0] }}</p>
+        <p>End: {{ bus['end'][0] }}</p>
+        <p>Stops: {{ bus['stops'] }}</p>
+        <p>Departure Time: {{ bus['times'][0] }}</p>
+        <p>Arrival Time: {{ bus['times'][1] }}</p>
+        <input type="button" value="Generate Qr" id="mybutton" onClick="qrCode">
+    </div>
+    <br>
 {% endfor %}
 
 {% endblock %}
