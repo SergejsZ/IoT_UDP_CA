@@ -2,17 +2,35 @@
 {% block title %}Register System{% endblock %}
 
 {% block content %}
-<h1>Buses</h1>
-{% for bus in buses %}
-    <div>
-        <p>Start: {{ bus['start'][0] }}</p>
-        <p>End: {{ bus['end'][0] }}</p>
-        <p>Stops: {{ bus['stops'] }}</p>
-        <p>Departure Time: {{ bus['times'][0] }}</p>
-        <p>Arrival Time: {{ bus['times'][1] }}</p>
-        <input type="button" value="Generate Qr" id="mybutton" onClick="qrCode">
-    </div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<input type="text" placeholder="Search..">
+<table class="table table-hover table-responsive">
+    <thead>
+    <tr>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+        <th scope="col">Stops</th>
+        <th scope="col">Departure Time</th>
+        <th scope="col">Arrival Time</th>
+        <th scope="col"></th>
+    </tr>
+  </thead>
+    <tbody>
+    {% for bus in buses %}
+    <tr>
+        <td>{{ bus['start'][0] }}</td>
+        <td>{{ bus['end'][0] }}</td>
+        <td>{{ bus['stops'][1][0]}}</td>
+        <td>{{ bus['times'][0] }}</td>
+        <td>{{ bus['times'][1] }}</td>
+        <td><input type="button" value="Generate Qr" id="mybutton" onClick="qrCode"></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
     <br>
-{% endfor %}
 
 {% endblock %}
