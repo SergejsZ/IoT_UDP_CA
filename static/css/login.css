@@ -5,8 +5,6 @@ body {
 }
 
 .form-signin {
-  max-width: 500px;
-  padding: 40px;
   text-align: center;
   margin: auto;
   float:right;
@@ -15,7 +13,10 @@ body {
 .form-signin .checkbox {
   font-weight: 400;
 }
-
+.form-signin .form-floating
+{
+    width:400px;
+}
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
@@ -27,7 +28,7 @@ body {
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -55,6 +56,10 @@ body {
    .logo{
     display: none;
    }
+   .form-signin .form-floating
+{
+    width:100%;
+}
   .form-signin {
     max-width: 500px;
     padding: 40px;

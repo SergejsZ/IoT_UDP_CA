@@ -1,46 +1,70 @@
-{% extends "base.html" %}
-{% block title %}Register System{% endblock %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-{% block content %}
-
-{% if message  %}
-    <div class="alert alert-secondary" role="alert">
-        <p>{{ message }}</p>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+</style>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link href="/static/css/login.css" rel="stylesheet">
+</head>
+<body>
+<div class="layout" style="display: flex; justify-content: flex-end">
+<div class="img-logo">
+    <img class="logo" src="/static/images/buslogo.jpg" alt="logo">
     </div>
-{% endif %}
-
 <main class="form-signin">
+    <div class="float-right">
 <form action="" method="POST">
-    <img class="logo" src="/static/images/busFinalLogo2.png" alt="logo">
-    <h1 class="h3 mb-3 fw-normal">Register Account</h1>
-
+    <h1 class="h1 mb-3 fw-normal">Transport4U</h1>
+    </br>
+    <h1 class="h3 mb-3 fw-normal">Create Account</h1>
     <div class="form-floating">
-        <input type="text" name="fullname" class="form-control" id="floatingFullname" placeholder="First name Last name">
-        <label for="floatingFullname">Fullname</label>
+        <input type="input" name="name" class="form-control" id="floatingName" placeholder="First Name Last Name">
+        <label for="floatingInput">Full Name</label>
     </div>
     </br>
     <div class="form-floating">
-        <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
-        <label for="floatingEmail">Email address</label>
+        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
     </div>
     </br>
     <div class="form-floating">
-        <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
     </div>
-    <div class="form-floating">
-        <input type="password" name="password2" class="form-control" id="floatingConfirmPassword" placeholder="Confirm Password">
+     <div class="form-floating">
+        <input type="password" name="confirmPassword" class="form-control" id="floatingConfirmPassword" placeholder="Confirm Password">
         <label for="floatingConfirmPassword">Confirm Password</label>
     </div>
     </br>
-    <div class="login">
+    <div class="register">
       <label>
-        <a href="/">Login to your Account</a>
+        <a href="/">Already Have an Account? Login Here</a>
       </label>
     </div>
     </br>
-    <button class="w-100 btn btn-lg" type="submit">Sign in</button>
+    <button class="w-100 btn btn-lg" type="submit">Register</button>
     <p class="mt-2 mb-2 text-muted">&copy; Transport4U 2022</p>
-</form>
+  </form>
+    </div>
+
 </main>
-{% endblock %}
+    </div>
+</body>
+</html>
