@@ -2,8 +2,21 @@
 
 {% block content %}
 
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <button class="btn btn-outline-info" type="button"><img src="/static/images/yourticket.jpg" alt="return">Your Ticket
+    </button>
+    <button class="btn btn-outline-info" type="button"><img src="/static/images/bill.jpg" alt="receipt">Purchase Ticket
+    </button>
+    <button class="btn btn-outline-info" type="button"><img src="/static/images/bus.jpg" alt="tickets">Timetables
+    </button>
+    <button class="btn btn-outline-info" type="button"><a href="/logout">Logout</a></button>
+</div>
+<div id="main">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Transport4U</span>
+</div>
 <div class="header">
-    <h2>Transport4U</h2>
+    <h2></h2>
 </div>
 
 <!--{% if message  %}-->
@@ -12,25 +25,34 @@
 <!--    </div>-->
 <!--{% endif %}-->
 
-<div class="column middle" style="background-color:#FFFFFF;">
+<div class="column middle">
     <button type="button" class="btn btn-info btn-lg btn-block"><a href="/buses">Search Routes And Times</a></button>
 </div>
 
-<div class="column middle bottom" style="background-color:#FFFFFF;">
+<div class="column middle bottom">
     <button type="button" class="btn btn-info btn-lg btn-block"><h2>My Tickets</h2>
         <br>View, Refund and expenses
     </button>
 </div>
-
 <footer class="icon-bottom">
-    <div class="column bottom" style="background-color:#FFFFFF;">
-        <nav class="navbar navbar-light">
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/yourticket.jpg" alt="return"></button>
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/bill.jpg" alt="receipt"></button>
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/bus.jpg" alt="tickets"></button>
-                <button class="btn btn-outline-info" type="button"><img src="/static/images/backarrow.jpg" alt="return"></button>
-        </nav>
-    </div>
+
 </footer>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  document.body.style.backgroundColor = "white";
+}
+
+</script>
+
 
 {% endblock %}
