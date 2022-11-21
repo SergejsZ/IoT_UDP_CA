@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect, session
 import pymongo
 import bcrypt
 import qrcode
+import base64
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -119,10 +120,11 @@ def buses():
     qr.make(fit=True)
     img = qr.make_image(fill='black', back_color='white')
     img.save('qrcode001.png')
-
+    with open("qrcode001.png", "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
     # img = qrcode.make(id_bus, user)
     # img.save('qrcode001.png')
-    return render_template('buses.html', buses=all_bus)
+    return render_template('buses.html', buses=all_bus, qr=my_string)
 
 
 # end of code to run it
