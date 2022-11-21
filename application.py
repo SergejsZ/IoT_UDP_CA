@@ -104,27 +104,25 @@ def logout():
 @app.route("/buses", methods=["POST", "GET"])
 def buses():
     all_bus = bus.find()
-    return render_template('buses.html', buses=all_bus)
-@app.route("/buses", methods=["POST", "GET"])
-def stops():
-    all_stop = bus.find({'stops': 1})
-    return render_template('buses.html', stops=all_stop)
-
-def qrcode():
-    # Link for website
-    all_bus = bus.find_one({'_id': 1})
-    user = users.find_one({'username': 1})
+    id_bus = bus.find_one({}, {'_id': 1})
+    user = users.find_one({}, {'name': 1, '_id': 0})
+    print(id_bus)
+    print(user)
     # input_data = "https://towardsdatascience.com/face-detection-in-10-lines-for-beginners-1787aa1d9127"
     # Creating an instance of qrcode
     qr = qrcode.QRCode(
         version=1,
         box_size=10,
         border=5)
-    free_image = [all_bus, user]
+    free_image = [id_bus, user]
     qr.add_data(free_image)
     qr.make(fit=True)
     img = qr.make_image(fill='black', back_color='white')
     img.save('qrcode001.png')
+
+    # img = qrcode.make(id_bus, user)
+    # img.save('qrcode001.png')
+    return render_template('buses.html', buses=all_bus)
 
 
 # end of code to run it

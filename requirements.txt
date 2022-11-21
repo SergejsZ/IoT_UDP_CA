@@ -13,3 +13,4 @@ pymongo==4.2.0
 Werkzeug==2.1.2
 zipp==3.8.1
 django-qrcode~=0.3
+qrcode==7.3.1
