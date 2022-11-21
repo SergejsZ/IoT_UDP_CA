@@ -1,4 +1,9 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -14,19 +19,20 @@
         }
       }
 </style>
-{% extends "base.html" %}
-{% block title %}Login System{% endblock %}
-
-{% block content %}
-
-{% if message  %}
-    <div class="alert alert-secondary" role="alert">
-        <p>{{ message }}</p>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link href="/static/css/login.css" rel="stylesheet">
+</head>
+<body>
+<div class="layout" style="display: flex; justify-content: flex-end">
+<div class="img-logo">
+    <img class="logo" src="/static/images/buslogo.jpg" alt="logo">
     </div>
-{% endif %}
 <main class="form-signin">
+    <div class="float-right">
 <form action="" method="POST">
-    <img class="logo" src="/static/images/busFinalLogo2.png" alt="logo">
+    <h1 class="h1 mb-3 fw-normal">Transport4U</h1>
+    </br>
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
@@ -56,15 +62,14 @@
     </div>
     </br>
     <button class="w-100 btn btn-lg" type="submit">Sign in</button>
-    <div class="row">
-    <div class="col-md-3">
-        <a class="btn btn-outline-dark" href="/users/googleauth" role="button" style="text-transform:none">
-          <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
-        Login with Google
-        </a>
-    </div>
-    </div>
+    <a class="btn btn-outline-grey" href="/users/googleauth" role="button" style="text-transform:none">
+          <img width="40px" style="margin-bottom:3px; margin-right:1px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+        Google Login</a>
     <p class="mt-2 mb-2 text-muted">&copy; Transport4U 2022</p>
   </form>
+    </div>
+
 </main>
-{% endblock %}
+    </div>
+</body>
+</html>
