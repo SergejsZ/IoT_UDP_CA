@@ -3,55 +3,28 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color .5s;
+  background:url('/static/images/busbg.jpeg');
+  position: relative;
+  overflow-y:scrollable;
+  background-repeat:no-repeat;
 }
 
+body background
+{
+    opacity: 0.5;
+}
 /* Style the header */
-.header {
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-}
-
-
-
-nav
-{
-background-color: #407fed;
-width:100%;
-}
-.btn.btn-outline-info
-{
-background-color: #FFFFFF;
-margin-top: 50px;
-width: 50%;
-}
-.btn.btn-lg.btn-block
-{
-background-color: #407fed;
-}
-
-.btn.btn-lg.btn-block:hover{
-background-color: #386fcf;
-}
-
-.btn.btn-outline-info:hover
-{
-    background-color:#386fcf
-}
 
 .sidenav {
   height: 100%;
   width: 0;
   position: fixed;
   z-index: 1;
-  top: 0;
-  left: 0;
   background-color: #111;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
 }
-
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
@@ -76,11 +49,104 @@ background-color: #386fcf;
 #main {
   transition: margin-left .5s;
   padding: 16px;
+  height:100vh;
+
 }
 
-@media screen and (max-height: 450px) {
+@media screen and (max-height: 1000px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
 
+.icon-bottom{
+  position:fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  background-color:#407fed;
+  text-align: center;
+  padding: 16px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
+.content{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+
+}
+
+.btn
+{
+    border-color: white;
+    color:black;
+    background-color: white;
+}
+
+.btn:hover
+{
+    border: white;
+    color:white;
+    background-color:#386fcf;
+}
+.btn:active
+{
+    border: white;
+    color:white;
+    background-color:#386fcf
+}
+
+.btn-main
+{
+    border:none;
+    color:white;
+    background-color: #407fed;
+    border-radius: 10px;
+    text-align:center;
+    width:50%;
+    padding:10px;
+
+}
+
+.btn-main:hover
+{
+    background-color:#386fcf
+}
+
+.links
+{
+    color:white;
+    text-decoration: none;
+}
+
+.links:hover
+{
+    color:white;
+    text-decoration: none;
+}
+
+.routes
+{
+    padding:20px;
+    margin-top:100px;
+}
+
+.my-tickets
+{
+    padding:20px;
+}
+
+.float-md-left{
+box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.float-md-right{
+box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.clear1 { clear: both; height: 500px; }
+.clear2 { clear: both; height: 100px; }

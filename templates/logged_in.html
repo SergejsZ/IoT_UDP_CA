@@ -4,39 +4,66 @@
 
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <button class="btn btn-outline-info" type="button"><img src="/static/images/yourticket.jpg" alt="return">Your Ticket
-    </button>
-    <button class="btn btn-outline-info" type="button"><img src="/static/images/bill.jpg" alt="receipt">Purchase Ticket
-    </button>
-    <button class="btn btn-outline-info" type="button"><img src="/static/images/bus.jpg" alt="tickets">Timetables
-    </button>
-    <button class="btn btn-outline-info" type="button"><a href="/logout">Logout</a></button>
+    <a href="#">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="/logout">Logout</a>
 </div>
+
 <div id="main">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Transport4U</span>
+    <span style="font-size:30px;cursor:pointer;color:#407fed;" onclick="openNav()">&#9776; Transport4U</span>
+    <center>
+        <div class="routes">
+            <button type="button" class="btn-main"><a class="links" href="/buses"><h2>Search Routes And Times</h2></a>
+            </button>
+        </div>
+
+        <div class="my-tickets">
+            <button type="button" class="btn-main"><h2>My Tickets</h2>
+                <br>View, Refund and Expenses
+            </button>
+        </div>
+    </center>
+    <div class="clear1"></div>
+
+    <div class="float-md-left" style="color:black;background-color:white;width:50%;margin-top:800px;">
+        <h1><a id="contact"></a>Contact</h1>
+        <img src="/static/images/busFinalLogo2.png" alt="logo" style="width:200px;height:100px;">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.</p>
+    </div>
+
+    <div class="float-md-right" style="color:black;background-color:white;width:50%;">
+        <h1><a id="about">About Us</a></h1>
+        <img src="/static/images/busFinalLogo2.png" alt="logo" style="width:200px;height:100px;">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.</p>
+    </div>
+    <div class="clear2"></div>
+    <div class="icon-bottom">
+        <button class="btn" type="button"><img src="/static/images/yourticket.jpg" alt="return">Your
+            Ticket
+        </button>
+        <button class="btn" type="button"><img src="/static/images/bill.jpg" alt="receipt">Purchase
+            Ticket
+        </button>
+        <button class="btn" type="button"><img src="/static/images/bus.jpg" alt="tickets">Timetables
+        </button>
+    </div>
 </div>
-<div class="header">
-    <h2></h2>
-</div>
+
 
 <!--{% if message  %}-->
 <!--    <div class="alert alert-secondary" role="alert">-->
 <!--        <p>{{ message }}</p>-->
 <!--    </div>-->
 <!--{% endif %}-->
-
-<div class="column middle">
-    <button type="button" class="btn btn-info btn-lg btn-block"><a href="/buses">Search Routes And Times</a></button>
-</div>
-
-<div class="column middle bottom">
-    <button type="button" class="btn btn-info btn-lg btn-block"><h2>My Tickets</h2>
-        <br>View, Refund and expenses
-    </button>
-</div>
-<footer class="icon-bottom">
-
-</footer>
 
 <script>
 function openNav() {
@@ -45,14 +72,13 @@ function openNav() {
   document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
+  document.getElementById("main").style.marginLeft= "0";
   document.body.style.backgroundColor = "white";
 }
 
-</script>
 
+</script>
 
 {% endblock %}
