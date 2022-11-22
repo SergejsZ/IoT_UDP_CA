@@ -32,11 +32,7 @@ def register():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        user_found = users.find_one({"name": user})
         email_found = users.find_one({"email": email})
-        if user_found:
-            message = 'There already is a user by that name'
-            return render_template('register.html', message=message)
         if email_found:
             message = 'This email already exists in database'
             return render_template('register.html', message=message)
@@ -122,9 +118,10 @@ def buses():
     img.save('qrcode001.png')
     with open("qrcode001.png", "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
+        print(my_string)
     # img = qrcode.make(id_bus, user)
     # img.save('qrcode001.png')
-    return render_template('buses.html', buses=all_bus, qr=my_string)
+    return render_template('buses.html', buses=all_bus)
 
 
 # end of code to run it
