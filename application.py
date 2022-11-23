@@ -1,8 +1,15 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, abort
+from google.oauth2 import id_token
+from google_auth_oauthlib.flow import Flow
+from pip._vendor import cachecontrol
+import google.auth.transport.requests
 import pymongo
 import bcrypt
-import qrcode
-import base64
+#import qrcode
+#import base64
+import os
+import pathlib
+import requests
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -12,6 +19,14 @@ db = client.get_database('T4U')
 users = db.users
 bus = db.buses
 tickets = db.tickets
+
+GOOGLE_CLIENT_ID = "806422887626-sum7vf05g9277fk14dectaiaqee34mbo.apps.googleusercontent.com"
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+flow = Flow.from_client_secrets_file(client_secrets_file=client_secrets_file,
+                                     scopes=["https://www.googleapis.com/auth/userinfo.profile",
+                                             "https://www.googleapis.com/auth/userinfo.email", "openid"],
+                                     redirect_uri="https://dawidiot22.tk/callback"
+                                     )
 
 ACCESS = {
     'guest': 0,
@@ -89,39 +104,77 @@ def index():
     return render_template('index.html', message=message)
 
 
-@app.route("/logout", methods=["POST", "GET"])
+@app.route("/logout")  #the logout page and function
 def logout():
-    if "email" in session:
-        session.pop("email", None)
-        return redirect(url_for("index"))
-    else:
-        return redirect(url_for("index"))
+    session.clear()
+    return redirect("/")
 
 
 @app.route("/buses", methods=["POST", "GET"])
 def buses():
+    # Get all bus records
     all_bus = bus.find()
-    id_bus = bus.find_one({}, {'_id': 1})
-    user = users.find_one({}, {'name': 1, '_id': 0})
-    print(id_bus)
-    print(user)
-    # input_data = "https://towardsdatascience.com/face-detection-in-10-lines-for-beginners-1787aa1d9127"
-    # Creating an instance of qrcode
-    qr = qrcode.QRCode(
-        version=1,
-        box_size=10,
-        border=5)
-    free_image = [id_bus, user]
-    qr.add_data(free_image)
-    qr.make(fit=True)
-    img = qr.make_image(fill='black', back_color='white')
-    img.save('qrcode001.png')
-    with open("qrcode001.png", "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
-        print(my_string)
-    # img = qrcode.make(id_bus, user)
+
+    # QR Code Generator (Temp hardcoded)
+    # id_bus = bus.find_one({}, {'_id': 1})
+    # user = users.find_one({}, {'name': 1, '_id': 0})
+    # qr = qrcode.QRCode(
+    #     version=1,
+    #     box_size=10,
+    #     border=5)
+    # free_image = [id_bus, user]
+    # qr.add_data(free_image)
+    # qr.make(fit=True)
+    # img = qr.make_image(fill='black', back_color='white')
     # img.save('qrcode001.png')
+
+    # Encoding the Image with base64
+    # with open("qrcode001.png", "rb") as img_file:
+    #     my_string = base64.b64encode(img_file.read())
+    #     print(my_string)
+
     return render_template('buses.html', buses=all_bus)
+
+
+# Google login auth
+def login_is_required(function):  # a function to check if the user is authorized or not
+    def wrapper(*args, **kwargs):
+        if "google_id" not in session:  # authorization required
+            return abort(401)
+        else:
+            return function()
+
+    return wrapper
+
+
+@app.route("/google_login")  # the page where the user can login
+def google_login():
+    authorization_url, state = flow.authorization_url()  # asking the flow class for the authorization (login) url
+    session["state"] = state
+    return redirect(authorization_url)
+
+
+@app.route("/callback")  #this is the page that will handle the callback process meaning process after the authorization
+def callback():
+    flow.fetch_token(authorization_response=request.url)
+
+    if not session["state"] == request.args["state"]:
+        abort(500)  #state does not match!
+
+    credentials = flow.credentials
+    request_session = requests.session()
+    cached_session = cachecontrol.CacheControl(request_session)
+    token_request = google.auth.transport.requests.Request(session=cached_session)
+
+    id_info = id_token.verify_oauth2_token(
+        id_token=credentials._id_token,
+        request=token_request,
+        audience=GOOGLE_CLIENT_ID
+    )
+
+    session["google_id"] = id_info.get("sub")  #defing the results to show on the page
+    session["name"] = id_info.get("name")
+    return redirect("/logged_in")  # the final page where the authorized users will end up
 
 
 # end of code to run it
