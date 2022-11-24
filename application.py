@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, render_template, request, url_for, redirect, session, abort
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
@@ -5,8 +7,8 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import pymongo
 import bcrypt
-#import qrcode
-#import base64
+# import qrcode
+# import base64
 import os
 import pathlib
 import requests
@@ -33,6 +35,21 @@ ACCESS = {
     'user': 1,
     'admin': 2
 }
+
+alive = 0
+data = {}
+
+
+@app.route("/sensor")
+def keep_alive():
+    global alive, data
+    alive += 1
+    keep_alive_count = str(alive)
+    data['keep_alive'] = keep_alive_count
+    parsed_json = json.dumps(data)
+    print(parsed_json)
+    return render_template('sensor.html'), str(parsed_json)
+
 
 
 @app.route("/register", methods=['post', 'get'])
@@ -104,7 +121,7 @@ def index():
     return render_template('index.html', message=message)
 
 
-@app.route("/logout")  #the logout page and function
+@app.route("/logout")  # the logout page and function
 def logout():
     session.clear()
     return redirect("/")
@@ -154,12 +171,13 @@ def google_login():
     return redirect(authorization_url)
 
 
-@app.route("/callback")  #this is the page that will handle the callback process meaning process after the authorization
+@app.route(
+    "/callback")  # this is the page that will handle the callback process meaning process after the authorization
 def callback():
     flow.fetch_token(authorization_response=request.url)
 
     if not session["state"] == request.args["state"]:
-        abort(500)  #state does not match!
+        abort(500)  # state does not match!
 
     credentials = flow.credentials
     request_session = requests.session()
@@ -172,11 +190,11 @@ def callback():
         audience=GOOGLE_CLIENT_ID
     )
 
-    session["google_id"] = id_info.get("sub")  #defing the results to show on the page
+    session["google_id"] = id_info.get("sub")  # defing the results to show on the page
     session["name"] = id_info.get("name")
     return redirect("/logged_in")  # the final page where the authorized users will end up
 
 
 # end of code to run it
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
