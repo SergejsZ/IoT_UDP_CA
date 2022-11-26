@@ -195,6 +195,13 @@ def callback():
     return redirect("/logged_in")  # the final page where the authorized users will end up
 
 
+
+@app.route("/mytickets", methods=['post', 'get'])
+def mytickets():
+
+    return render_template('mytickets.html')
+
+
 # end of code to run it
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

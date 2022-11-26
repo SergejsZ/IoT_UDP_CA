@@ -1,8 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+
+{% block content %}
     <title>Login</title>
 <style>
       .bd-placeholder-img {
@@ -24,14 +22,35 @@
   <link href="/static/css/login.css" rel="stylesheet">
 </head>
 <body>
+
+<header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <h1><a href="index.html"><span>Transport4U</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto" href="/">Login</a></li>
+
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+
 <div class="layout" style="display: flex; justify-content: flex-end">
-<div class="img-logo">
-    <img class="logo" src="/static/images/buslogo.jpg" alt="logo">
+    <div class="logo-div">
+        <img class="logo-img" src="/static/images/landingimage.png" alt="logo">
     </div>
 <main class="form-signin">
     <div class="float-right">
 <form action="" method="POST">
-    <h1 class="h1 mb-3 fw-normal">Transport4U</h1>
     </br>
     <h1 class="h3 mb-3 fw-normal">Create Account</h1>
     <div class="form-floating">
@@ -48,10 +67,11 @@
         <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Password</label>
     </div>
-     <div class="form-floating">
+    <div class="form-floating">
         <input type="password" name="password2" class="form-control" id="floatingConfirmPassword" placeholder="Confirm Password">
         <label for="floatingConfirmPassword">Confirm Password</label>
     </div>
+
     </br>
     <div class="register">
       <label>
@@ -60,11 +80,10 @@
     </div>
     </br>
     <button class="w-100 btn btn-lg" type="submit">Register</button>
-    <p class="mt-2 mb-2 text-muted">&copy; Transport4U 2022</p>
   </form>
     </div>
 
 </main>
     </div>
 </body>
-</html>
+{% endblock %}
