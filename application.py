@@ -85,11 +85,7 @@ def register():
 
 @app.route('/logged_in')
 def logged_in():
-    if "email" in session:
-        email = session["email"]
-        return render_template('logged_in.html', email=email)
-    else:
-        return redirect(url_for("index"))
+    return render_template('logged_in.html')
 
 
 @app.route("/", methods=["POST", "GET"])
