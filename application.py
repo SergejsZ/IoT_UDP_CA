@@ -13,13 +13,17 @@ import os
 import pathlib
 import requests
 
+# models
+# import user
+# import bus
+
 app = Flask(__name__)
 app.secret_key = "testing"
 client = pymongo.MongoClient("mongodb+srv://admin:0xIIagmADdNCgowK@cluster0.3aqrglf.mongodb.net/?retryWrites=true&w"
                              "=majority")
 db = client.get_database('T4U')
 users = db.users
-bus = db.buses
+buss = db.buses
 tickets = db.tickets
 
 GOOGLE_CLIENT_ID = "806422887626-sum7vf05g9277fk14dectaiaqee34mbo.apps.googleusercontent.com"
@@ -29,12 +33,6 @@ flow = Flow.from_client_secrets_file(client_secrets_file=client_secrets_file,
                                              "https://www.googleapis.com/auth/userinfo.email", "openid"],
                                      redirect_uri="https://dawidiot22.tk/callback"
                                      )
-
-ACCESS = {
-    'guest': 0,
-    'user': 1,
-    'admin': 2
-}
 
 alive = 0
 data = {}
@@ -49,7 +47,6 @@ def keep_alive():
     parsed_json = json.dumps(data)
     print(parsed_json)
     return render_template('sensor.html'), str(parsed_json)
-
 
 
 @app.route("/register", methods=['post', 'get'])
@@ -126,7 +123,7 @@ def logout():
 @app.route("/buses", methods=["POST", "GET"])
 def buses():
     # Get all bus records
-    all_bus = bus.find()
+    all_bus = buss.find()
 
     # QR Code Generator (Temp hardcoded)
     # id_bus = bus.find_one({}, {'_id': 1})
@@ -191,10 +188,8 @@ def callback():
     return redirect("/logged_in")  # the final page where the authorized users will end up
 
 
-
 @app.route("/mytickets", methods=['post', 'get'])
 def mytickets():
-
     return render_template('mytickets.html')
 
 
