@@ -66,65 +66,40 @@
 </section><!-- End Hero -->
 
 <main id="main">
-        <section id="features">
-            <div class="input-group">
-                <div class="form-outline">
-                    <input type="search" id="form1" class="form-control">
-                </div>
-                <button type="button" class="btn btn-primary">
-                    <i class="bx bx-search"></i>
-                </button>
-            </div>
-
-                {% for bus in buses %}
-                    <div class="bus-box">
-                    {{ bus['start'][0] }}
-                    {{ bus['end'][0] }}
-                        {% for stop in bus['stops'] %}
-                        {{ stop[0]}}
-                        {% endfor %}
-                    {{ bus['times'][0] }}
-                    {{ bus['times'][1] }}
-                    <input type="button" value="Generate Qr" id="mybutton" onClick="qrCode">
-                        </div>
-                {% endfor %}
-        </section>
-
     <!-- ======= Pricing Section ======= -->
-<!--    <section id="pricing" class="pricing">-->
-<!--        <div class="container">-->
+    <section id="pricing" class="pricing">
+        <div class="container">
 
-<!--            <div class="section-title" data-aos="fade-up">-->
-<!--                <p>Check Times and Bus Prices</p>-->
-<!--            </div>-->
-<!--            <div class="row" data-aos="fade-left">-->
-<!--                <div class="col-lg-3 col-md-6">-->
-<!--                    <div class="box" data-aos="zoom-in" data-aos-delay="100">-->
-<!--                        <h4><sup>$</sup>4<span>Per Person</span></h4>-->
-<!--                        {% for bus in buses %}-->
-<!--                        <ul>-->
-<!--                            <li>{{ bus['start'][0] }}</li>-->
-<!--                            <li>{{ bus['end'][0] }}</li>-->
-<!--                            {% for stop in bus['stops'] %}-->
-<!--                                <li>{{ stop[0]}}</li>-->
-<!--                            {% endfor %}-->
-<!--                            <li>{{ bus['times'][0] }}</li>-->
-<!--                            <li>{{ bus['times'][1] }}</li>-->
-<!--                        </ul>-->
-<!--                        {% endfor %}-->
-<!--                        <div class="btn-wrap">-->
-<!--                            <input type="button" class="btn-buy" value="Buy Now" id="mybutton" onClick="qrCode">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+            <div class="section-title" data-aos="fade-up">
+                <p>Check Times and Bus Prices</p>
+            </div>
+            {% for bus in buses %}
+            <div class="row" data-aos="fade-left">
+                <div class="col-lg-3 col-md-6">
+                    <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                        <h4><sup>$</sup>4<span>Per Person</span></h4>
 
-<!--            </div>-->
+                        <ul>
+                            <li>{{ bus['start'][0] }}</li>
+                            <li>{{ bus['end'][0] }}</li>
+                            {% for stop in bus['stops'] %}
+                                <li>{{ stop[0]}}</li>
+                            {% endfor %}
+                            <li>{{ bus['times'][0] }} - {{ bus['times'][1] </li>
+                        </ul>
 
-
+                        <div class="btn-wrap">
+                            <input type="button" class="btn-buy" value="Buy Now" id="mybutton" onClick="qrCode">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
 
 
-<!--        </div>-->
-<!--    </section>&lt;!&ndash; End Pricing Section &ndash;&gt;-->
+
+        </div>
+    </section><!-- End Pricing Section -->
 </main>
 <script>
 function openNav() {
