@@ -73,8 +73,9 @@
             <div class="section-title" data-aos="fade-up">
                 <p>Check Times and Bus Prices</p>
             </div>
-            {% for bus in buses %}
+
             <div class="row" data-aos="fade-left">
+                {% for bus in buses %}
                 <div class="col-lg-3 col-md-6">
                     <div class="box" data-aos="zoom-in" data-aos-delay="100">
                         <h4><sup>$</sup>4<span>Per Person</span></h4>
@@ -85,7 +86,8 @@
                             {% for stop in bus['stops'] %}
                                 <li>{{ stop[0]}}</li>
                             {% endfor %}
-                            <li>{{ bus['times'][0] }} - {{ bus['times'][1] </li>
+                            <li>{{ bus['times'][0] }}</li>
+                            <li>{{ bus['times'][1] }}</li>
                         </ul>
 
                         <div class="btn-wrap">
@@ -93,8 +95,9 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
 
 
 
