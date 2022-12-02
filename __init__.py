@@ -7,14 +7,14 @@ from pip._vendor import cachecontrol
 import google.auth.transport.requests
 import pymongo
 import bcrypt
-# import qrcode
-# import base64
+import qrcode
+import base64
 import os
 import pathlib
 import requests
 
 # models
-# import user
+from . import user
 # import bus
 
 app = Flask(__name__)
@@ -55,28 +55,18 @@ def register():
     if "email" in session:
         return redirect(url_for("logged_in"))
     if request.method == "POST":
-        user = request.form.get("fullname")
+        name = request.form.get("fullname")
         email = request.form.get("email")
 
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        email_found = users.find_one({"email": email})
-        if email_found:
-            message = 'This email already exists in database'
-            return render_template('register.html', message=message)
-        if password1 != password2:
-            message = 'Passwords should match!'
-            return render_template('register.html', message=message)
-        else:
-            hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
-            user_input = {'name': user, 'email': email, 'password': hashed, 'access_lvl': ACCESS['user']}
-            users.insert_one(user_input)
+        user.register_user(name,email,password1,password2)
 
-            user_data = users.find_one({"email": email})
-            new_email = user_data['email']
+        user_data = users.find_one({"email": email})
+        new_email = user_data['email']
 
-            return redirect(url_for("logged_in", email=new_email))
+        return redirect(url_for("logged_in", email=new_email))
     return render_template('register.html')
 
 
@@ -125,25 +115,27 @@ def buses():
     # Get all bus records
     all_bus = buss.find()
 
+    return render_template('buses.html', buses=all_bus)
+
+
+def generate_qr():
     # QR Code Generator (Temp hardcoded)
-    # id_bus = bus.find_one({}, {'_id': 1})
-    # user = users.find_one({}, {'name': 1, '_id': 0})
-    # qr = qrcode.QRCode(
-    #     version=1,
-    #     box_size=10,
-    #     border=5)
-    # free_image = [id_bus, user]
-    # qr.add_data(free_image)
-    # qr.make(fit=True)
-    # img = qr.make_image(fill='black', back_color='white')
-    # img.save('qrcode001.png')
+    id_bus = buss.find_one({}, {'_id': 1})
+    user = users.find_one({}, {'name': 1, '_id': 0})
+    qr = qrcode.QRCode(
+        version=1,
+        box_size=10,
+        border=5)
+    free_image = [id_bus, user]
+    qr.add_data(free_image)
+    qr.make(fit=True)
+    img = qr.make_image(fill='black', back_color='white')
+    img.save('qrcode001.png')
 
     # Encoding the Image with base64
-    # with open("qrcode001.png", "rb") as img_file:
-    #     my_string = base64.b64encode(img_file.read())
-    #     print(my_string)
-
-    return render_template('buses.html', buses=all_bus)
+    with open("qrcode001.png", "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
+        print(my_string)
 
 
 # Google login auth
