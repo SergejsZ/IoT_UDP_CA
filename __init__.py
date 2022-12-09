@@ -13,8 +13,9 @@ import os
 import pathlib
 import requests
 
+
 # models
-from . import user
+#import user
 # import bus
 
 app = Flask(__name__)
@@ -61,7 +62,7 @@ def register():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        user.register_user(name,email,password1,password2)
+        user.register_user(name, email, password1, password2)
 
         user_data = users.find_one({"email": email})
         new_email = user_data['email']
@@ -182,7 +183,17 @@ def callback():
 
 @app.route("/mytickets", methods=['post', 'get'])
 def mytickets():
-    return render_template('mytickets.html')
+    bus_eireann = buss.find({'route':"100"})
+    print(bus_eireann)
+
+    return render_template('mytickets.html', buses=bus_eireann)
+
+
+@app.route("/checkout", methods=["POST", "GET"])
+def checkout():
+    # Get all bus records
+
+    return render_template('checkout.html')
 
 
 # end of code to run it

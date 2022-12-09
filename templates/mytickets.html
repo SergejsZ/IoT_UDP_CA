@@ -15,11 +15,9 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="/mytickets">My Tickets</a></li>
-                <li><a class="nav-link scrollto" href="#features">Features</a></li>
-                <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                <li><a class="nav-link scrollto " href="/logged_in">Home</a></li>
+                <li><a class="nav-link scrollto " href="/buses">Timetables</a></li>
+                <li><a class="nav-link scrollto active" href="/mytickets">Your Ticket</a></li>
                 <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
 
             </ul>
@@ -67,41 +65,66 @@
 </section><!-- End Hero -->
 
 <main id="main">
-<!-- ======= About Section ======= -->
+    <!-- ======= About Section ======= -->
     <section id="features" class="about">
-      <div class="container-fluid">
+        <div class="container-fluid">
 
-        <div class="row">
-          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch" data-aos="fade-right">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 ticket-box d-flex justify-content-center align-items-stretch"
+                     data-aos="fade-right">
+                    <img src="/static/images/qrcode001.png" style="width:400px; height:400px;">
+                </div>
 
-          </div>
+                <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5"
+                     data-aos="fade-left">
+                    <h3><span>Your Ticket</span></h3>
+                    <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima
+                        temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam
+                        sint et id nulla tenetur. Suscipit aut voluptate.</p>
 
-          <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5" data-aos="fade-left">
-            <h3><span>Key Features Of Our App</span></h3>
-            <p>Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam sint et id nulla tenetur. Suscipit aut voluptate.</p>
+                    <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon"><i class="bx bx-bus"></i></div>
+                        <h4 class="title"><a href="">Route</a></h4>
+                        {% for bus in buses %}
+                        {% for stop in bus['stops'] %}
+                        <div class="timeline">
+                            <div class="timeline-container">
+                                <div class="timeline-content">
+                                    <h7>{{ stop[0]}}</h7>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
 
-            <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
-              <div class="icon"><i class="bx bx-user"></i></div>
-              <h4 class="title"><a href="">Passenger Tracking</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                    <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="icon"><i class="bx bx-stop"></i></div>
+                        <h4 class="title"><a href="">Chosen Stop</a></h4>
+
+                    </div>
+
+                    <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="icon"><i class="bx bx-user"></i></div>
+                        <h4 class="title"><a href="">Bus Capacity</a></h4>
+                        <div role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                             style="--value: 75"></div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
-              <div class="icon"><i class="bx bx-wifi"></i></div>
-              <h4 class="title"><a href="">Bus GPS Location</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-
-            <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
-              <div class="icon"><i class="bx bx-atom"></i></div>
-              <h4 class="title"><a href="">QR Ticket Scanner</a></h4>
-              <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
-            </div>
-
-          </div>
         </div>
-
-      </div>
     </section><!-- End About Section -->
+
+    <div onload="keepAlive(); time(); setupPubNub();">
+
+        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.7.2.0.js%22%3E"></script>
+        <script src="/static/js/main.js"></script>
+        <h1> Online </h1>
+        <h2>Connection: <span id="Connection_id">...</span></h2>
+        <h2>Motion: <span id="motion_id">...</span></h2>
+    </div>
+
 </main>
 {% endblock %}

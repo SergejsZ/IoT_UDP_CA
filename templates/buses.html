@@ -1,8 +1,10 @@
+
 {% extends "base.html" %}
 
 {% block title %}Bus Timetables{% endblock %}
 
 {% block content %}
+
 <header id="header" class="fixed-top d-flex align-items-center header-transparent">
     <div class="container d-flex align-items-center justify-content-between">
 
@@ -14,11 +16,9 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="/mytickets">My Tickets</a></li>
-                <li><a class="nav-link scrollto" href="#features">Features</a></li>
-                <li><a class="nav-link scrollto" href="#faq">FAQ</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                <li><a class="nav-link scrollto " href="/logged_in">Home</a></li>
+                <li><a class="nav-link scrollto active" href="/buses">Timetables</a></li>
+                <li><a class="nav-link scrollto" href="/mytickets">Your Ticket</a></li>
                 <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
 
             </ul>
@@ -71,27 +71,33 @@
         <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-                <p>Check Times and Bus Prices</p>
+                <p>Check Routes, Times and Stops</p>
+                <div class="search-box">
+                    <div class="icon"><i class="bx bx-search"></i></div>
+                  <input type="text" class="form-control form-input" placeholder="Search Bus Route/Number...">
+                </div>
             </div>
 
             <div class="row" data-aos="fade-left">
+
                 {% for bus in buses %}
                 <div class="col-lg-3 col-md-6">
                     <div class="box" data-aos="zoom-in" data-aos-delay="100">
-                        <h4><sup>$</sup>4<span>Per Person</span></h4>
+                        <h4>Route<span>{{ bus['route'] }}</span></h4>
 
                         <ul>
-                            <li>{{ bus['start'][0] }}</li>
-                            <li>{{ bus['end'][0] }}</li>
+                            <li><h6>Start</h6>{{ bus['start'][0] }}</li>
+                            <li><h6>End</h6>{{ bus['end'][0] }}</li>
+                            <h6>Stops</h6>
                             {% for stop in bus['stops'] %}
                                 <li>{{ stop[0]}}</li>
                             {% endfor %}
-                            <li>{{ bus['times'][0] }}</li>
-                            <li>{{ bus['times'][1] }}</li>
+                            <li><h6>Departure</h6>{{ bus['times'][0] }}</li>
+                            <li><h6>Arrival</h6>{{ bus['times'][1] }}</li>
                         </ul>
 
                         <div class="btn-wrap">
-                            <input type="button" class="btn-buy" value="Buy Now" id="mybutton" onClick="qrCode">
+                            <button><a href="/checkout">Return</a></button>
                         </div>
                     </div>
                 </div>
@@ -104,22 +110,6 @@
         </div>
     </section><!-- End Pricing Section -->
 </main>
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-  document.body.style.backgroundColor = "white";
-}
 
 
-
-
-
-</script>
 {% endblock %}

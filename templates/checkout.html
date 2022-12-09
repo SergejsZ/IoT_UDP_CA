@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+<header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <div class="logo">
+            <h1><a href="index.html"><span>Transport4U</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto " href="/logged_in">Home</a></li>
+                <li><a class="nav-link scrollto " href="/buses">Timetables</a></li>
+                <li><a class="nav-link scrollto" href="/mytickets">Your Ticket</a></li>
+                <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
+
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+
+<section id="hero">
+
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
+                <div data-aos="zoom-out">
+                    <h1><span>Purchase Bus Ticket</span></h1>
+                    <h2></h2>
+                    <div class="text-center text-lg-start">
+                        <a href="/buses" class="btn-get-started scrollto">Return</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
+                <img src="/static/images/landingimage.png" class="img-fluid animated" alt="">
+            </div>
+        </div>
+    </div>
+
+    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+         viewBox="0 24 150 28 " preserveAspectRatio="none">
+        <defs>
+            <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        </defs>
+        <g class="wave1">
+            <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)"></use>
+        </g>
+        <g class="wave2">
+            <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"></use>
+        </g>
+        <g class="wave3">
+            <use xlink:href="#wave-path" x="50" y="9" fill="#fff"></use>
+        </g>
+    </svg>
+
+</section><!-- End Hero -->
+
   <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
     <!-- Set up a container element for the button -->
     <div id="paypal-button-container"></div>
@@ -30,5 +86,4 @@
         }
       }).render('#paypal-button-container');
     </script>
-</body>
-</html>
+{% endblock %}

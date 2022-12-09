@@ -21,14 +21,14 @@ ACCESS = {
 
 
 class User(db.Document):
-    # user_id = db.StringField()
-    name = db.StringField()
-    email = db.StringField()
-    password = db.BinaryField()
-    access_lvl = db.IntField()
+    user_id = db.FieldString()
+    name = db.FieldString()
+    email = db.FieldString()
+    password = db.FieldBinary()
+    access_lvl = db.FieldInt()
 
-    def __init__(self, name, email, password, access_lvl=ACCESS['user']):
-        # self.user_id = user_id
+    def __init__(self, user_id, name, email, password, access_lvl=ACCESS['user']):
+        self.user_id = user_id
         self.name = name
         self.email = email
         self.password = password

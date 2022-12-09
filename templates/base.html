@@ -22,12 +22,14 @@
     <!-- Template Main CSS File For Main Page -->
     <link href="/static/assets/css/style.css" rel="stylesheet">
 
-
     <!-- Template Main CSS File For Bus Page -->
     <link href="/static/css/buses.css" rel="stylesheet">
 
     <!-- Template Main CSS File For Login/Register Page -->
     <link href="/static/css/login.css" rel="stylesheet">
+
+    <!-- Template Main CSS File For My Ticket Page -->
+    <link href="/static/css/mytickets.css" rel="stylesheet">
 
 
     <title>{% block title %}{%endblock %}</title>
@@ -45,13 +47,12 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-info">
                         <h3>Transport4U</h3>
-                        <p class="pb-3"><em>Qui repudiandae et eum dolores alias sed ea. Qui suscipit veniam excepturi
-                            quod.</em></p>
+                        <p class="pb-3"><em>Small 3rd Year Software Developer team working towards better transport in Ireland</em></p>
                         <p>
-                            A108 Adam Street <br>
-                            NY 535022, USA<br><br>
+                            Dundalk Institute of Technology <br>
+                            Dundalk, Ireland<br><br>
                             <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
+                            <strong>Email:</strong> info@transport4u.ie<br>
                         </p>
                         <div class="social-links mt-3">
                             <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -65,28 +66,27 @@
                 <div class="col-lg-2 col-md-6 footer-links">
                     <h4>Useful Links</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/logged_in">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/mytickets">My Tickets</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#features">Features</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#faq">FAQ</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/logout">Logout</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-6 footer-links">
                     <h4>Our Services</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Bus Tracking</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Bus Timetables</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Scannable Ticket</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Passenger Tracking</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-4 col-md-6 footer-newsletter">
                     <h4>Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                    <p>Subscribe to our Newsletter for the latest travel updates</p>
                     <form action="" method="post">
                         <input type="email" name="email"><input type="submit" value="Subscribe">
                     </form>

@@ -1,1 +1,14 @@
 
+h6{
+font-weight: bold;
+}
+
+.btn-buy{
+border:none;
+}
+
+.search-box input[type="text"] {
+  width: 45%;
+  border-color: blue;
+}
+

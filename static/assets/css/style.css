@@ -807,6 +807,12 @@ section {
   min-height: 300px;
 }
 
+.about .ticket-box {
+  background: center center no-repeat;
+  background-size: contain;
+  min-height: 300px;
+}
+
 .about .play-btn {
   width: 94px;
   height: 94px;
@@ -1239,7 +1245,8 @@ section {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  height:
 }
 
 .pricing h3 {
