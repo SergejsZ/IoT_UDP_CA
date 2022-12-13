@@ -62,7 +62,7 @@ def register():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        user.register_user(name, email, password1, password2)
+        # user.register_user(name, email, password1, password2)
 
         user_data = users.find_one({"email": email})
         new_email = user_data['email']
@@ -81,7 +81,6 @@ def index():
     message = 'Please login to your account'
     if "email" in session:
         return redirect(url_for("logged_in"))
-
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
@@ -120,23 +119,38 @@ def buses():
 
 
 def generate_qr():
-    # QR Code Generator (Temp hardcoded)
-    id_bus = buss.find_one({}, {'_id': 1})
-    user = users.find_one({}, {'name': 1, '_id': 0})
+    one_bus = buss.find_one({})
+    email_user = users.find_one({})
     qr = qrcode.QRCode(
         version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
-        border=5)
-    free_image = [id_bus, user]
-    qr.add_data(free_image)
+        border=4
+    )
+    qr.add_data([email_user, one_bus['times']])
     qr.make(fit=True)
-    img = qr.make_image(fill='black', back_color='white')
-    img.save('qrcode001.png')
 
-    # Encoding the Image with base64
-    with open("qrcode001.png", "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
-        print(my_string)
+    # Save the QR code as a PNG image
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Save the QR code image as a base64-encoded string
+    with open("qr_code.png", "wb") as f:
+        img.save(f)
+
+    with open("qr_code.png", "rb") as f:
+        img_data = f.read()
+        base64_img = base64.b64encode(img_data).decode()
+
+    # Print the base64-encoded string
+    print(base64_img)
+
+    generated_ticket = {'bus_id': one_bus['_id'],
+                        'email': email_user['email'],
+                        'ticket': base64_img,
+                        'route': one_bus['route'],
+                        'times': one_bus['times']}
+
+    tickets.insert_one(generated_ticket)
 
 
 # Google login auth
