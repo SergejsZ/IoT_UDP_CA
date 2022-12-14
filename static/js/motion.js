@@ -89,28 +89,3 @@ function keepAlive()
 }
 
 
-function time()
-{
-	let d = new Date();
-	let currentSec = d.getTime();
-	console.log(currentSec - aliveSecond)
-	if(currentSec - aliveSecond > heartbeatRate + 1000)
-	{
-
-		document.getElementById("Connection_id").innerHTML = "DEAD";
-	}
-	else
-	{
-		document.getElementById("Connection_id").innerHTML = "ALIVE";
-	}
-	setTimeout('time()', 1000);
-}
-
-function handleClick(cb){
-	if(cb.checked){
-		value = "ON";
-	}else{
-		value = "OFF";
-	}
-	publishMessage(cb.id+"-"+value);
-}

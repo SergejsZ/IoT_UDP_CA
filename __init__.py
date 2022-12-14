@@ -16,6 +16,7 @@ from bson.binary import Binary
 # models
 # import user
 # import bus
+# import ticket
 
 app = Flask(__name__)
 app.secret_key = "testing"
@@ -38,7 +39,7 @@ alive = 0
 data = {}
 
 
-@app.route("/sensor")
+@app.route("/keep_alive")
 def keep_alive():
     global alive, data
     alive += 1
@@ -46,7 +47,7 @@ def keep_alive():
     data['keep_alive'] = keep_alive_count
     parsed_json = json.dumps(data)
     print(parsed_json)
-    return render_template('mytickets.html'), str(parsed_json)
+    return render_template("motion.html"), parsed_json
 
 
 @app.route("/register", methods=['post', 'get'])
