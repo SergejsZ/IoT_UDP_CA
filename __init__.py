@@ -114,6 +114,14 @@ def logout():
 def buses():
     # Get all bus records
     all_bus = buss.find()
+    # Search Method
+    if request.method == "POST":
+        # Get the search term(s) from the user
+        search_terms = request.form.get("search_terms")
+        print (search_terms)
+        # Query the database with the search term(s)
+        search = "$search"
+        all_bus = buss.find({"$text": {search: search_terms}})
 
     return render_template('buses.html', buses=all_bus)
 
