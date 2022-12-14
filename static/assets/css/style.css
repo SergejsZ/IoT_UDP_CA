@@ -1246,7 +1246,7 @@ section {
   border-radius: 5px;
   position: relative;
   overflow-y: auto;
-  height:
+  height: 75%;
 }
 
 .pricing h3 {

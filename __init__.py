@@ -11,10 +11,10 @@ import base64
 import os
 import pathlib
 import requests
-
+from bson.binary import Binary
 
 # models
-#import user
+# import user
 # import bus
 
 app = Flask(__name__)
@@ -117,7 +117,7 @@ def buses():
     if request.method == "POST":
         # Get the search term(s) from the user
         search_terms = request.form.get("search_terms")
-        print (search_terms)
+        print(search_terms)
         # Query the database with the search term(s)
         search = "$search"
         all_bus = buss.find({"$text": {search: search_terms}})
@@ -146,14 +146,10 @@ def generate_qr():
 
     with open("qr_code.png", "rb") as f:
         img_data = f.read()
-        base64_img = base64.b64encode(img_data).decode()
-
-    # Print the base64-encoded string
-    print(base64_img)
 
     generated_ticket = {'bus_id': one_bus['_id'],
                         'email': email_user['email'],
-                        'ticket': base64_img,
+                        'ticket': Binary(img_data),
                         'route': one_bus['route'],
                         'times': one_bus['times']}
 
@@ -204,16 +200,18 @@ def callback():
 
 @app.route("/mytickets", methods=['post', 'get'])
 def mytickets():
-    bus_eireann = buss.find({'route':"100"})
+    bus_eireann = buss.find({'route': "100"})
     print(bus_eireann)
+
+    # qr_code = tickets.find({'ticket': 'ticket'})[data]
+    #
+    # html_img = f'<img src="data:image/png;base64,{qr_code}" alt="QR" />'
 
     return render_template('mytickets.html', buses=bus_eireann)
 
 
 @app.route("/checkout", methods=["POST", "GET"])
 def checkout():
-    # Get all bus records
-
     return render_template('checkout.html')
 
 

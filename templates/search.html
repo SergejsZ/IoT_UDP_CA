@@ -1,10 +1,6 @@
-
 {% extends "base.html" %}
 
-{% block title %}Bus Timetables{% endblock %}
-
 {% block content %}
-
 <header id="header" class="fixed-top d-flex align-items-center header-transparent">
     <div class="container d-flex align-items-center justify-content-between">
 
@@ -17,8 +13,8 @@
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a class="nav-link scrollto " href="/logged_in">Home</a></li>
-                <li><a class="nav-link scrollto active" href="/buses">Timetables</a></li>
-                <li><a class="nav-link scrollto" href="/mytickets">Your Ticket</a></li>
+                <li><a class="nav-link scrollto " href="/buses">Timetables</a></li>
+                <li><a class="nav-link scrollto active" href="/mytickets">Your Ticket</a></li>
                 <li><a class="nav-link scrollto" href="/logout">Logout</a></li>
 
             </ul>
@@ -34,15 +30,15 @@
         <div class="row justify-content-between">
             <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
                 <div data-aos="zoom-out">
-                    <h1><span>Bus Routes and Times</span></h1>
+                    <h1><span>Search Results</span></h1>
                     <h2></h2>
                     <div class="text-center text-lg-start">
-                        <a href="/logged_in" class="btn-get-started scrollto">Return</a>
+                        <a href="/buese" class="btn-get-started scrollto">Return</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                <img src="/static/images/landingimage.png" class="img-fluid animated" alt="">
+                <img src="/static/images/ticketlandingimage.png" class="img-fluid animated" alt="">
             </div>
         </div>
     </div>
@@ -66,51 +62,38 @@
 </section><!-- End Hero -->
 
 <main id="main">
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
-        <div class="container">
+  <div>
 
-            <div class="section-title" data-aos="fade-up">
-                <p>Check Routes, Times and Stops</p>
-                <form action="POST">
-                <div class="search-box">
-                    <div class="icon"><i class="bx bx-search"></i></div>
-                  <input type="text" id="search_terms" class="form-control form-input" placeholder="Search Bus Route/Number...">
-                </div>
-                </form>
-            </div>
-
-            <div class="row" data-aos="fade-left">
-
-                {% for bus in buses %}
+      <div class="row" data-aos="fade-left">
+                {% for bus in results %}
                 <div class="col-lg-3 col-md-6">
                     <div class="box" data-aos="zoom-in" data-aos-delay="100">
-                        <h4>Route<span>{{ bus['route'] }}</span></h4>
+                        <h4><sup>{{ bus['route']}}</sup><span>Route</span></h4>
 
                         <ul>
-                            <li><h6>Start</h6>{{ bus['start'][0] }}</li>
-                            <li><h6>End</h6>{{ bus['end'][0] }}</li>
-                            <h6>Stops</h6>
-                            {% for stop in bus['stops'] %}
+                            <h5 style="text-decoration: underline;">Starting Point</h5>
+                            <li>{{ bus['start'][0] }}</li>
+                            <h5 style="text-decoration: underline;">End Point</h5>
+                            <li>{{ bus['end'][0] }}</li>
+                            <h5 style="text-decoration: underline;">Stops</h5>
+                            {% for stop in result['stops'] %}
                                 <li>{{ stop[0]}}</li>
                             {% endfor %}
-                            <li><h6>Departure</h6>{{ bus['times'][0] }}</li>
-                            <li><h6>Arrival</h6>{{ bus['times'][1] }}</li>
+                            <h5 style="text-decoration: underline;">Departure</h5>
+                            <li>{{ bus['times'][0] }}</li>
+                            <h5 style="text-decoration: underline;">Arrival</h5>
+                            <li>{{ bus['times'][1] }}</li>
                         </ul>
 
                         <div class="btn-wrap">
-                            <button onclick="generate_qr"><a href="/checkout">Return</a></button>
+                            <a href="/checkout">Purchase</a>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+      {% endfor %}
 
-
-
-
-        </div>
-    </section><!-- End Pricing Section -->
+  </div>
 </main>
 
 
