@@ -49,18 +49,18 @@ def delete_all():
         print("failed " + str(e))
 
 
-def register_user(name, email, password1, password2):
-    email_found = User.find_one({"email": email})
-    if email_found:
-        message = 'This email already exists in database'
-        return render_template('register.html', message=message)
-    if password1 != password2:
-        message = 'Passwords should match!'
-        return render_template('register.html', message=message)
-    else:
-        hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
-        user_input = {'name': name, 'email': email, 'password': hashed, 'access_lvl': 1}
-        User.insert(user_input)
+# def register_user(name, email, password1, password2):
+#     email_found = User.find_one({"email": email})
+#     if email_found:
+#         message = 'This email already exists in database'
+#         return render_template('register.html', message=message)
+#     if password1 != password2:
+#         message = 'Passwords should match!'
+#         return render_template('register.html', message=message)
+#     else:
+#         hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
+#         user_input = {'name': name, 'email': email, 'password': hashed, 'access_lvl': 1}
+#         User.insert(user_input)
 
 
 def get_user_row_if_exists(user_id):

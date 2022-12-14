@@ -62,7 +62,17 @@ def register():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        # user.register_user(name, email, password1, password2)
+        email_found = users.find_one({"email": email})
+        if email_found:
+            message = 'This email already exists in database'
+            return render_template('register.html', message=message)
+        if password1 != password2:
+            message = 'Passwords should match!'
+            return render_template('register.html', message=message)
+        else:
+            hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
+            user_input = {'name': name, 'email': email, 'password': hashed, 'access_lvl': 1}
+            users.insert(user_input)
 
         user_data = users.find_one({"email": email})
         new_email = user_data['email']
@@ -117,7 +127,7 @@ def buses():
     # Search Method
     if request.method == "POST":
         # Get the search term(s) from the user
-        search_terms = request.form.get("search_terms")
+        search_terms = request.args.get("search_terms")
         print(search_terms)
         # Query the database with the search term(s)
         search = "$search"
