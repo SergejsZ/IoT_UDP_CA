@@ -205,11 +205,11 @@ def mytickets():
     bus_eireann = buss.find({'route': "100"})
     print(bus_eireann)
 
-    # qr_code = tickets.find({'ticket': 'ticket'})[data]
-    #
+    qr_code = tickets.find_one({}, {'ticket': 1})
+    print(qr_code)
     # html_img = f'<img src="data:image/png;base64,{qr_code}" alt="QR" />'
 
-    return render_template('mytickets.html', buses=bus_eireann)
+    return render_template('mytickets.html', buses=bus_eireann, qr=qr_code)
 
 
 @app.route("/checkout", methods=["POST", "GET"])
