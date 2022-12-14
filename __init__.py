@@ -120,7 +120,8 @@ def buses():
         print(search_terms)
         # Query the database with the search term(s)
         search = "$search"
-        all_bus = buss.find({"$text": {search: search_terms}})
+        search_result = buss.find({"$text": {search: search_terms}})
+        return render_template('search.html', search_results=search_result)
 
     return render_template('buses.html', buses=all_bus)
 
