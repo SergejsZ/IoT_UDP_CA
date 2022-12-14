@@ -1,5 +1,4 @@
 import json
-
 from flask import Flask, render_template, request, url_for, redirect, session, abort
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
@@ -47,7 +46,7 @@ def keep_alive():
     data['keep_alive'] = keep_alive_count
     parsed_json = json.dumps(data)
     print(parsed_json)
-    return render_template('sensor.html'), str(parsed_json)
+    return render_template('mytickets.html'), str(parsed_json)
 
 
 @app.route("/register", methods=['post', 'get'])

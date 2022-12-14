@@ -3,6 +3,10 @@ let heartbeatRate = 1000;
 let myChannel = "sergejs_sd3b_pi_channel";
 let pubnub;
 
+let previous_message= "";
+let current_message = "";
+let count = 0;
+
 const setupPubNub = () =>{
     pubnub = new PubNub({
         publishKey: 'pub-c-07659b0d-b4ed-4fed-a636-dabd418f94f3',
@@ -17,8 +21,24 @@ const setupPubNub = () =>{
             }
         },
         message: (messageEvent) => {
-            console.log(messageEvent);
-            document.getElementById("motion_id").innerHTML = "Motion Detected";
+
+            console.log(messageEvent.message);
+            console.log(messageEvent.timetoken);
+            current_message = messageEvent.message;
+            if((previous_message === "dawids_motion_detected") && (current_message === "sergejs_motion_detected"))
+            {
+            count++;
+               // document.getElementById(motion_id).innerHTML = "Need to increase count";
+                console.log("Increasing count " + count);
+            }
+            else if((previous_message === "sergejs_motion_detected") && (current_message === "dawids_motion_detected"))
+            {
+            count--;
+                //document.getElementById(motion_id).innerHTML = "Need to decrease count";
+                console.log("Decreasing count " + count);
+            }
+            document.getElementById("motion_id").innerHTML = "Current count " +count;
+            previous_message = current_message;
         },
         presence: (presenceEvent) => {
             //Handle presence
@@ -60,7 +80,7 @@ function keepAlive()
 		else
 		{
 
-			document.getElementById("motion_id").innerHTML = "No Motion Detected";
+			document.getElementById("motion_id").innerHTML = "Current count "+ count;
 		}
 
 		console.log(responseJson)})
