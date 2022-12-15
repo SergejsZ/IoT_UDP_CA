@@ -153,10 +153,10 @@ def generate_qr():
     img = qr.make_image(fill_color="black", back_color="white")
 
     # Save the QR code image as a base64-encoded string
-    with open("qr_code.png", "wb") as f:
+    with open("static/images/qr_code.png", "wb") as f:
         img.save(f)
 
-    with open("qr_code.png", "rb") as f:
+    with open("static/images/qr_code.png", "rb") as f:
         img_data = f.read()
 
     generated_ticket = {'bus_id': one_bus['_id'],
