@@ -12,23 +12,39 @@ import os
 import pathlib
 import requests
 from bson.binary import Binary
+from config import config
+
+# Pubnub
+from pubnub.pnconfiguration import PNConfiguration
+from pubnub.pubnub import PubNub
+
+pnconfig = PNConfiguration()
+
+pnconfig.subscribe_key = config.get("subscribe_key")
+pnconfig.publish_key = config.get("publish_key")
+pnconfig.user_id = config.get("user_id")
+pnconfig.cipher_key = config.get("cipher_key")
+pnconfig.auth_key = config.get("auth_key")
+pubnub = PubNub(pnconfig)
+
+my_channel = config.get("my_channel")
 
 # models
-# import user
+import user
 # import bus
 # import ticket
 
 app = Flask(__name__)
 app.secret_key = "testing"
-client = pymongo.MongoClient("mongodb+srv://admin:0xIIagmADdNCgowK@cluster0.3aqrglf.mongodb.net/?retryWrites=true&w"
-                             "=majority")
-db = client.get_database('T4U')
-users = db.users
-buss = db.buses
-tickets = db.tickets
+# client = pymongo.MongoClient("mongodb+srv://admin:0xIIagmADdNCgowK@cluster0.3aqrglf.mongodb.net/?retryWrites=true&w"
+#                              "=majority")
+# db = client.get_database('T4U')
+# users = db.users
+# buss = db.buses
+# tickets = db.tickets
 
 GOOGLE_CLIENT_ID = "806422887626-sum7vf05g9277fk14dectaiaqee34mbo.apps.googleusercontent.com"
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, ".client_secret.json")
 flow = Flow.from_client_secrets_file(client_secrets_file=client_secrets_file,
                                      scopes=["https://www.googleapis.com/auth/userinfo.profile",
                                              "https://www.googleapis.com/auth/userinfo.email", "openid"],
@@ -62,19 +78,21 @@ def register():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        email_found = users.find_one({"email": email})
-        if email_found:
-            message = 'This email already exists in database'
-            return render_template('register.html', message=message)
-        if password1 != password2:
-            message = 'Passwords should match!'
-            return render_template('register.html', message=message)
-        else:
-            hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
-            user_input = {'name': name, 'email': email, 'password': hashed, 'access_lvl': 1}
-            users.insert(user_input)
+        user.register_user(name, email, password1, password2)
 
-        user_data = users.find_one({"email": email})
+        # email_found = users.find_one({"email": email})
+        # if email_found:
+        #     message = 'This email already exists in database'
+        #     return render_template('register.html', message=message)
+        # if password1 != password2:
+        #     message = 'Passwords should match!'
+        #     return render_template('register.html', message=message)
+        # else:
+        #     hashed = bcrypt.hashpw(password2.encode('utf-8'), bcrypt.gensalt())
+        #     user_input = {'name': name, 'email': email, 'password': hashed, 'access_lvl': 1}
+        #     users.insert(user_input)
+
+        user_data = user.users.find_one({"email": email})
         new_email = user_data['email']
 
         return redirect(url_for("logged_in", email=new_email))
@@ -95,7 +113,7 @@ def index():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        email_found = users.find_one({"email": email})
+        email_found = user.users.find_one({"email": email})
         if email_found:
             email_val = email_found['email']
             passwordcheck = email_found['password']
@@ -123,7 +141,7 @@ def logout():
 @app.route("/buses", methods=["POST", "GET"])
 def buses():
     # Get all bus records
-    all_bus = buss.find()
+    all_bus = user.buss.find()
     # Search Method
     if request.method == "POST":
         # Get the search term(s) from the user
@@ -131,15 +149,15 @@ def buses():
         print(search_terms)
         # Query the database with the search term(s)
         search = "$search"
-        search_result = buss.find({"$text": {search: search_terms}})
+        search_result = user.buss.find({"$text": {search: search_terms}})
         return render_template('search.html', search_results=search_result)
 
     return render_template('buses.html', buses=all_bus)
 
 
 def generate_qr():
-    one_bus = buss.find_one({})
-    email_user = users.find_one({})
+    one_bus = user.buss.find_one({})
+    email_user = user.users.find_one({})
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -165,7 +183,7 @@ def generate_qr():
                         'route': one_bus['route'],
                         'times': one_bus['times']}
 
-    tickets.insert_one(generated_ticket)
+    user.tickets.insert_one(generated_ticket)
 
 
 # Google login auth
@@ -212,10 +230,10 @@ def callback():
 
 @app.route("/mytickets", methods=['post', 'get'])
 def mytickets():
-    bus_eireann = buss.find({'route': "100"})
+    bus_eireann = user.buss.find({'route': "100"})
     print(bus_eireann)
 
-    qr_code = tickets.find_one({}, {'ticket': 1})
+    qr_code = user.tickets.find_one({}, {'ticket': 1})
     print(qr_code)
     # html_img = f'<img src="data:image/png;base64,{qr_code}" alt="QR" />'
 

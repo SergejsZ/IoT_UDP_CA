@@ -1,4 +1,4 @@
-from __init__ import db
+# from __init__ import db
 
 
 class Bus(db.Document):
